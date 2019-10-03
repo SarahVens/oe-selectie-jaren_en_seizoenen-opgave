@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:oe_selectie_02.wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="270.666" Width="542" Loaded="Window_Loaded">
     <Grid>
-        
+
+        <TextBox x:Name="txtJaar" TextAlignment="Center" HorizontalAlignment="Left" Height="20" Margin="67,10,0,0" TextWrapping="Wrap" Text="9999" VerticalAlignment="Top" Width="107" TextChanged="TxtJaar_TextChanged"/>
+        <Button x:Name="btnMin" Content="-" Grid.Column="1" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Width="37" Click="BtnMin_Click"/>
+        <Button x:Name="btnPlus" Content="+" HorizontalAlignment="Left" Margin="174,10,0,0" VerticalAlignment="Top" Width="37" RenderTransformOrigin="4.631,1.65" Click="BtnPlus_Click"/>
+        <Label x:Name="lblSchrikkeljaar" Content="" HorizontalAlignment="Left" Margin="30,35,0,0" VerticalAlignment="Top" Width="181" BorderThickness="1
+               "/>
+        <Label Content="Maand 
+               " HorizontalAlignment="Left" Margin="30,78,0,0" VerticalAlignment="Top" Width="55" Height="28"/>
+        <ComboBox x:Name="cmbMaanden" HorizontalAlignment="Left" Margin="85,78,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CmbMaanden_SelectionChanged"/>
+        <Label x:Name="lblSeizoen" Content="" HorizontalAlignment="Left" Margin="218,74,0,0" VerticalAlignment="Top" Width="293"/>
+
     </Grid>
 </Window>
