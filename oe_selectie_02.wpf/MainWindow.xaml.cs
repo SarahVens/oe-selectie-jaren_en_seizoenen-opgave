@@ -26,12 +26,6 @@ namespace oe_selectie_02.wpf
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            int jaar = DateTime.Now.Year;
-            txtJaar.Text = jaar.ToString(); 
-            if (IsSchrikkeljaar(jaar))
-                lblSchrikkeljaar.Content = jaar.ToString() + " is een schrikkeljaar";
-            else
-                lblSchrikkeljaar.Content = jaar.ToString() + " is GEEN schrikkeljaar";
 
             cmbMaanden.Items.Add("januari");
             cmbMaanden.Items.Add("februari");
@@ -53,67 +47,22 @@ namespace oe_selectie_02.wpf
         {
             if (txtJaar.IsLoaded)
             {
-                if (int.TryParse(txtJaar.Text, out int jaar))
-                {
-                    BepaalSchrikkeljaar(jaar);
-                }
-                else
-                    lblSchrikkeljaar.Content = "ongeldige invoer";
+ 
             }
         }
 
         private void BtnPlus_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(txtJaar.Text, out int jaar))
-            {
-                jaar++;
-                txtJaar.Text = jaar.ToString();
-                BepaalSchrikkeljaar(jaar);
-            }
-            else
-                lblSchrikkeljaar.Content = "ongeldige invoer";
+            // if (int.TryParse(txtJaar.Text, out int jaar))
             
         }
 
         private void BtnMin_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(txtJaar.Text, out int jaar))
-            {
-                jaar--;
-                txtJaar.Text = jaar.ToString();
-                BepaalSchrikkeljaar(jaar);
-            }
-            else
-                lblSchrikkeljaar.Content = "ongeldige invoer";
+            // if (int.TryParse(txtJaar.Text, out int jaar))
 
         }
-        void BepaalSchrikkeljaar(int jaar)
-        {
-            if (IsSchrikkeljaar(jaar))
-                lblSchrikkeljaar.Content = jaar.ToString() + " is een schrikkeljaar";
-            else
-                lblSchrikkeljaar.Content = jaar.ToString() + " is GEEN schrikkeljaar";
-
-        }
-        bool IsSchrikkeljaar(int jaar)
-        {
-            // deelbaar door 4, maar niet deelbaar door 100, tenzij deelbaar door 400
-            if (jaar % 4 != 0)
-                return false;
-            else
-            {
-                if(jaar%400 == 0)
-                    return true;
-                else
-                {
-                    if(jaar%100 == 0)
-                        return false;
-                    else
-                        return true;
-                }
-            }
-            
-        }
+ 
 
         private void CmbMaanden_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -124,23 +73,7 @@ namespace oe_selectie_02.wpf
              * Herfst: 1 september t/m 30 november
              * Winter: 1 december t/m 28 februari
             */
-            int indeks = cmbMaanden.SelectedIndex;
-            indeks++;
-            lblSeizoen.Content = "valt in de " + GeefSeizoen(indeks);
         }
-        string GeefSeizoen(int maandNr)
-        {
-            string seizoen;
-            if (maandNr <= 2 || maandNr == 12)
-                seizoen = "winter";
-            else if (maandNr <= 5)
-                seizoen = "lente";
-            else if (maandNr <= 8)
-                seizoen = "zomer";
-            else
-                seizoen = "herfst";
-            return seizoen;
 
-        }
     }
 }
