@@ -20,6 +20,9 @@ namespace oe_selectie_02.wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        DateTime now = DateTime.Now;
+        int jaar;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -39,27 +42,82 @@ namespace oe_selectie_02.wpf
             cmbMaanden.Items.Add("oktober");
             cmbMaanden.Items.Add("november");
             cmbMaanden.Items.Add("december");
+            jaar = now.Year;
+            
+            txtJaar.Text = jaar.ToString();
 
+        }
+        void IsJaarEenSchrikkeljaar(int jaar)
+        {
 
+            if (jaar % 4 == 0 && (jaar % 100 != 0 || jaar % 400 == 0)) lblSchrikkeljaar.Content = "dit jaar is een schrikkeljaar";
+            else lblSchrikkeljaar.Content = "dit jaar is geen scrhikkeljaar";
+        }
+
+        void GeefHetSeizoen(int index)
+        {
+            string seizoen;
+            switch(index)
+            {
+                case 2:
+                case 3:
+                case 4:
+                    seizoen = "Lente";
+                    break;
+                case 5 :
+                case 6:
+                case 7:
+                    seizoen = "zomer";
+                    break;
+                case 8:
+                case 9:
+                case 10:
+                    seizoen = "herfst";
+                    break;
+                default:
+                    seizoen = "winter";
+
+                    break;
+         }
+            lblSeizoen.Content = seizoen;
         }
 
         private void TxtJaar_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (txtJaar.IsLoaded)
-            {
- 
+           {
+                txtJaar.MaxLength = 4;
+                if (int.TryParse(txtJaar.Text, out int jaar) == true)
+                {
+                   IsJaarEenSchrikkeljaar(jaar);
+                  
+
+                }
+                else lblSchrikkeljaar.Content = "geef enkel cijfers in";
+                
             }
+            
         }
 
         private void BtnPlus_Click(object sender, RoutedEventArgs e)
         {
-            // if (int.TryParse(txtJaar.Text, out int jaar))
+            if (int.TryParse(txtJaar.Text, out int jaar) == true)
+            {
+                jaar++;
+                txtJaar.Text = jaar.ToString();
+                IsJaarEenSchrikkeljaar(jaar);
+            }
             
         }
 
         private void BtnMin_Click(object sender, RoutedEventArgs e)
         {
-            // if (int.TryParse(txtJaar.Text, out int jaar))
+            if (int.TryParse(txtJaar.Text, out int jaar)==true)
+            {
+                jaar--;
+                txtJaar.Text = jaar.ToString();
+                IsJaarEenSchrikkeljaar(jaar);
+            }
 
         }
  
@@ -73,6 +131,8 @@ namespace oe_selectie_02.wpf
              * Herfst: 1 september t/m 30 november
              * Winter: 1 december t/m 28 februari
             */
+            int index = cmbMaanden.SelectedIndex;
+            GeefHetSeizoen(index);
         }
 
     }
